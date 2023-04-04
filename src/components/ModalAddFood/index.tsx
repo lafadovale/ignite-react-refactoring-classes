@@ -10,14 +10,16 @@ import { Form } from "./styles";
 interface ModalAddFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddFood: (data: AddFood) => void;
+  handleAddFood: (data: Omit<IFood, "id" | "available">) => void;
 }
 
-interface AddFood {
-  image: string;
+interface IFood {
+  id: number;
   name: string;
-  price: string;
   description: string;
+  price: number;
+  available: boolean;
+  image: string;
 }
 
 export function ModalAddFood({
@@ -27,7 +29,7 @@ export function ModalAddFood({
 }: ModalAddFoodProps) {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = async (data: AddFood) => {
+  const handleSubmit = async (data: Omit<IFood, "id" | "available">) => {
     handleAddFood(data);
     setIsOpen();
   };
